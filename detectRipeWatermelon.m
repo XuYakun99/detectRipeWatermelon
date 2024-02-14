@@ -24,23 +24,4 @@ function ripe = detectRipeWatermelon(ripeThreshold, unripeThreshold, sound)
 end
 
 
-function sound = recordSound(recorder, duration)
-    % 实时录制声音数据的函数
-    disp('请说话：'); % 提示用户开始说话
-    recordblocking(recorder, duration); % 录制指定时长的声音
-    disp('录音结束！');
-    sound = getaudiodata(recorder); % 从录音器中获取声音数据
-end
 
-
-
-function ripe = determineRipeness(dominantFrequency, ripeThreshold, unripeThreshold)
-    % 基于主导频率和阈值确定成熟度的函数
-    if dominantFrequency > ripeThreshold
-        ripe = true; % 西瓜成熟
-    elseif dominantFrequency < unripeThreshold
-        ripe = false; % 西瓜未成熟
-    else
-        ripe = []; % 无法确定成熟度
-    end
-end
