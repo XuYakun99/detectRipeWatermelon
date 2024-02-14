@@ -23,36 +23,6 @@ function ripe = detectRipeWatermelon(ripeThreshold, unripeThreshold, sound)
     end
 end
 
-function [frequencies, powerSpectrum, dominantFrequency] = performFourierTransform(sound, Fs)
-    % 对声音数据执行傅里叶变换的函数
-    L = length(sound);
-    Y = fft(sound);
-    P2 = abs(Y/L);
-    P1 = P2(1:L/2+1);
-    P1(2:end-1) = 2*P1(2:end-1);
-    frequencies = Fs*(0:(L/2))/L;
-    powerSpectrum = P1;
-    
-    % 寻找主导频率
-    [~, index] = max(powerSpectrum);
-    dominantFrequency = frequencies(index);
-    
-    % 绘制频谱图并标注主频
-    figure;
-    plot(frequencies, powerSpectrum);
-    hold on;
-    plot(dominantFrequency, powerSpectrum(index), 'ro', 'MarkerSize', 10); % 标注主频
-    title('Frequency Spectrum');
-    xlabel('Frequency (Hz)');
-    ylabel('Power');
-    legend('Power Spectrum', 'Dominant Frequency');
-    
-end
-
-function sound = importSound(filename)
-    % 从文件中导入声音数据的函数
-    [sound, ~] = audioread(filename); % 导入声音并丢弃采样频率
-end
 
 function sound = recordSound(recorder, duration)
     % 实时录制声音数据的函数
