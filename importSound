@@ -1,0 +1,4 @@
+function sound = importSound(filename)
+    % 从文件中导入声音数据的函数
+    [sound, ~] = audioread(filename); % 导入声音并丢弃采样频率
+end
